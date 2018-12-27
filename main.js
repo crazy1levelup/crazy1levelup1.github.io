@@ -177,12 +177,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./page-not-found/page-not-found.component */ "./src/app/page-not-found/page-not-found.component.ts");
 /* harmony import */ var _items_item_start_item_start_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./items/item-start/item-start.component */ "./src/app/items/item-start/item-start.component.ts");
 /* harmony import */ var _items_item_edit_item_edit_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./items/item-edit/item-edit.component */ "./src/app/items/item-edit/item-edit.component.ts");
+/* harmony import */ var _items_items_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./items/items.service */ "./src/app/items/items.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -229,9 +231,10 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"]
             ],
-            providers: [_shopping_list_shopping_list_service__WEBPACK_IMPORTED_MODULE_15__["ShoppingListService"]],
+            providers: [_shopping_list_shopping_list_service__WEBPACK_IMPORTED_MODULE_15__["ShoppingListService"], _items_items_service__WEBPACK_IMPORTED_MODULE_20__["ItemsService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })
     ], AppModule);
@@ -461,7 +464,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-primary\" (click)=\"onLoadServers()\">Load items</button>"
+module.exports = "<div class=\"col-md-12\">\r\n<button class=\"btn btn-primary\" (click)=\"onLoadServers()\">Load items</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -536,7 +539,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <img src=\"{{item.imagePath}}\" alt=\"{{item.name}}\" class=\"img-responsive\" style=\"max-height: 300px\">\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <h1>{{item.name}}</h1>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <div class=\"dropdown\">\n      <button type=\"button\" class=\"btn btn-primary dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Manage Item <span class=\"caret\"></span>\n      </button>\n      <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <li> <a class=\"dropdown-item\" (click)=\"onAddShoppingList()\" style=\"cursor: pointer\">To shopping list</a></li>\n        <li> <a class=\"dropdown-item\" (click)=\"onEditItem()\" style=\"cursor: pointer\">Edit item</a></li>\n        <li> <a class=\"dropdown-item\" style=\"cursor: pointer\">Delete Item</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    {{item.description}}\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <ul class=\"list-group\">\n      <li class=\"list-group-item\" *ngFor=\"let ingredient of item.ingredients\">\n        {{ingredient.name}} - {{ingredient.amount}}\n      </li>\n    </ul>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <img src=\"{{item.imagePath}}\" alt=\"{{item.name}}\" class=\"img-responsive\" style=\"max-height: 300px\">\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <h1>{{item.name}}</h1>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <div class=\"dropdown\">\n      <button type=\"button\" class=\"btn btn-primary dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Manage Item <span class=\"caret\"></span>\n      </button>\n      <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <li> <a class=\"dropdown-item\" (click)=\"onAddShoppingList()\" style=\"cursor: pointer\">To shopping list</a></li>\n        <li> <a class=\"dropdown-item\" (click)=\"onEditItem()\" style=\"cursor: pointer\">Edit item</a></li>\n        <li> <a class=\"dropdown-item\" (click)=\"onDeleteItem()\" style=\"cursor: pointer\">Delete Item</a></li>\n      </ul>\n    </div>\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    {{item.description}}\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <ul class=\"list-group\">\n      <li class=\"list-group-item\" *ngFor=\"let ingredient of item.ingredients\">\n        {{ingredient.name}} - {{ingredient.amount}}\n      </li>\n    </ul>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -586,6 +589,10 @@ var ItemDetailComponent = /** @class */ (function () {
         this.router.navigate(['edit'], { relativeTo: this.route });
         //this.router.navigate(['../', this.id, 'edit'], {relativeTo:this.route});
     };
+    ItemDetailComponent.prototype.onDeleteItem = function () {
+        this.itemService.deleteItem(this.id);
+        this.router.navigate(['/item']);
+    };
     ItemDetailComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-item-detail',
@@ -610,7 +617,7 @@ var ItemDetailComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2l0ZW1zL2l0ZW0tZWRpdC9pdGVtLWVkaXQuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched {\r\n    border: 1px solid red;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaXRlbXMvaXRlbS1lZGl0L2l0ZW0tZWRpdC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksc0JBQXNCO0NBQ3pCIiwiZmlsZSI6InNyYy9hcHAvaXRlbXMvaXRlbS1lZGl0L2l0ZW0tZWRpdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW5wdXQubmctaW52YWxpZC5uZy10b3VjaGVkLHRleHRhcmVhLm5nLWludmFsaWQubmctdG91Y2hlZCB7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCByZWQ7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -621,7 +628,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>Works</p>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <form [formGroup]=\"itemForm\" (ngSubmit)=\"onSubmit()\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!itemForm.valid\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-danger\"(click)=\"onCancel()\" >Cancel</button>\r\n                </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"name\">Name</label>\r\n                        <input type=\"text\" id=\"name\" formControlName=\"name\" class=\"form-control\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"imagePath\">Image URL</label>\r\n                        <input type=\"text\" id=\"imagePath\" formControlName=\"imagePath\" class=\"form-control\" #imagePath>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <img [src]=\"imagePath.value\" class=\"img-responsive\">\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"description\">Description</label>\r\n                        <textarea type=\"text\" id=\"description\" formControlName=\"description\" class=\"form-control\" rows=\"6\"></textarea>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\" formArrayName=\"ingredients\"> \r\n                    <div class=\"row\" *ngFor=\"let ingredientCtrl of getControls(); let i=index\" [formGroupName]=\"i\" style=\"margin-top: 10px\">\r\n                        <div class=\"col-md-6\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"name\">\r\n                        </div>\r\n                        <div class=\"col-md-4\">\r\n                            <input type=\"number\" class=\"form-control\" formControlName=\"amount\">\r\n                        </div>\r\n                        <div class=\"col-md-2\">\r\n                            <button type=\"button\" class=\"btn btn-danger\" (click)=\"onDeleteIngredient(i)\">X</button>\r\n                        </div>\r\n                    </div> \r\n                    <hr>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-12\">\r\n                            <button type=\"button\" class=\"btn btn-success\" (click)=\"onAddIngredient()\">Add Ingredient</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -637,6 +644,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemEditComponent", function() { return ItemEditComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _items_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../items.service */ "./src/app/items/items.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -648,9 +657,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var ItemEditComponent = /** @class */ (function () {
-    function ItemEditComponent(route) {
+    function ItemEditComponent(route, itemService, router) {
         this.route = route;
+        this.itemService = itemService;
+        this.router = router;
         this.editMode = false;
     }
     ItemEditComponent.prototype.ngOnInit = function () {
@@ -659,7 +672,65 @@ var ItemEditComponent = /** @class */ (function () {
             .subscribe(function (params) {
             _this.id = +params['id'];
             _this.editMode = params['id'] != null;
+            _this.initForm();
         });
+    };
+    ItemEditComponent.prototype.onSubmit = function () {
+        // const newItem = new ItemsModule(
+        //   this.itemForm.value['name'], 
+        //   this.itemForm.value['description'],
+        //   this.itemForm.value['imagePath'],
+        //   this.itemForm.value['ingredients']
+        //   );
+        if (this.editMode) {
+            this.itemService.updateItem(this.id, this.itemForm.value);
+        }
+        else {
+            this.itemService.addItem(this.itemForm.value);
+        }
+        this.onCancel();
+    };
+    ItemEditComponent.prototype.onAddIngredient = function () {
+        this.itemForm.get('ingredients').push(new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            'name': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+            'amount': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern(/^[1-9]+[0-9]*$/)])
+        }));
+    };
+    ItemEditComponent.prototype.onCancel = function () {
+        this.router.navigate(['../'], { relativeTo: this.route });
+    };
+    ItemEditComponent.prototype.onDeleteIngredient = function (index) {
+        this.itemForm.get('ingredients').removeAt(index);
+    };
+    ItemEditComponent.prototype.initForm = function () {
+        var itemName = '';
+        var itemImagePath = '';
+        var itemDescription = '';
+        var itemIngredients = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormArray"]([]);
+        if (this.editMode) {
+            var item = this.itemService.getItem(this.id);
+            itemName = item.name;
+            itemImagePath = item.imagePath;
+            itemDescription = item.description;
+            if (item['ingredients']) {
+                for (var _i = 0, _a = item.ingredients; _i < _a.length; _i++) {
+                    var ingredient = _a[_i];
+                    itemIngredients.push(new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+                        'name': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](ingredient.name, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+                        'amount': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](ingredient.amount, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern(/^[1-9]+[0-9]*$/)])
+                    }));
+                }
+            }
+        }
+        this.itemForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            'name': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](itemName, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+            'imagePath': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](itemImagePath, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+            'description': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](itemDescription, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+            'ingredients': itemIngredients
+        });
+    };
+    ItemEditComponent.prototype.getControls = function () {
+        return this.itemForm.get('ingredients').controls;
     };
     ItemEditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -667,7 +738,7 @@ var ItemEditComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./item-edit.component.html */ "./src/app/items/item-edit/item-edit.component.html"),
             styles: [__webpack_require__(/*! ./item-edit.component.css */ "./src/app/items/item-edit/item-edit.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _items_service__WEBPACK_IMPORTED_MODULE_3__["ItemsService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], ItemEditComponent);
     return ItemEditComponent;
 }());
@@ -694,7 +765,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n        <button class=\"btn btn-success\" (click)=\"onNewItem()\">New Item</button>\r\n    </div>\r\n</div>\r\n<hr>\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n        <app-oneitem *ngFor=\"let itemEl of items; let i = index\" [item]=\"itemEl\" [index]=\"i\"></app-oneitem>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <div >\r\n        <button class=\"btn btn-success\" (click)=\"onNewItem()\">New Item</button>\r\n    </div>\r\n</div>\r\n<hr>\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <app-oneitem *ngFor=\"let itemEl of items; let i = index\" [item]=\"itemEl\" [index]=\"i\"></app-oneitem>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -730,10 +801,18 @@ var ItemListComponent = /** @class */ (function () {
         this.route = route;
     }
     ItemListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.itemsService.itemsChanged
+            .subscribe(function (items) {
+            _this.items = items;
+        });
         this.items = this.itemsService.getItems();
     };
     ItemListComponent.prototype.onNewItem = function () {
         this.router.navigate(['new'], { relativeTo: this.route });
+    };
+    ItemListComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
     };
     ItemListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -921,7 +1000,6 @@ module.exports = "<div class=\"row\">\n    <div class=\"col-md-5\">\n<app-item-l
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemsComponent", function() { return ItemsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _items_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./items.service */ "./src/app/items/items.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -932,7 +1010,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var ItemsComponent = /** @class */ (function () {
     function ItemsComponent() {
     }
@@ -942,8 +1019,7 @@ var ItemsComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-items',
             template: __webpack_require__(/*! ./items.component.html */ "./src/app/items/items.component.html"),
-            styles: [__webpack_require__(/*! ./items.component.css */ "./src/app/items/items.component.css")],
-            providers: [_items_service__WEBPACK_IMPORTED_MODULE_1__["ItemsService"]]
+            styles: [__webpack_require__(/*! ./items.component.css */ "./src/app/items/items.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], ItemsComponent);
@@ -992,6 +1068,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _items_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./items.module */ "./src/app/items/items.module.ts");
 /* harmony import */ var _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/ingredient.model */ "./src/app/shared/ingredient.model.ts");
 /* harmony import */ var _shopping_list_shopping_list_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shopping-list/shopping-list.service */ "./src/app/shopping-list/shopping-list.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1005,9 +1082,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ItemsService = /** @class */ (function () {
     function ItemsService(slService) {
         this.slService = slService;
+        this.itemsChanged = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
         this.items = [
             new _items_module__WEBPACK_IMPORTED_MODULE_1__["ItemsModule"]('Starcraft2', 'RTS Game', 'https://www.geek.com/wp-content/uploads/2010/07/starcraft2-625x352.jpg', [new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('test', 1),
                 new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('test', 2)]),
@@ -1023,6 +1102,18 @@ var ItemsService = /** @class */ (function () {
     };
     ItemsService.prototype.addIngredientsToShoppingList = function (ingredients) {
         this.slService.addIngredients(ingredients);
+    };
+    ItemsService.prototype.addItem = function (item) {
+        this.items.push(item);
+        this.itemsChanged.next(this.items.slice());
+    };
+    ItemsService.prototype.updateItem = function (index, newItem) {
+        this.items[index] = newItem;
+        this.itemsChanged.next(this.items.slice());
+    };
+    ItemsService.prototype.deleteItem = function (index) {
+        this.items.splice(index, 1);
+        this.itemsChanged.next(this.items.slice());
     };
     ItemsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1191,7 +1282,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <form>\n      <div class=\"row\">\n        <div class=\"col-sm-5 form-group\">\n          <label for=\"name\">Name</label>\n          <input type=\"text\" id=\"name\" class=\"form-control\" #nameInput>\n        </div>\n        <div class=\"col-sm-3 form-group\">\n          <label for=\"amount\">Amount</label>\n          <input type=\"number\" id=\"amount\" class=\"form-control\" #amountInput>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-12\">\n          <button class=\"btn btn-success\" type=\"submit\" (click)=\"onAddItem()\">Add</button>\n          <button class=\"btn btn-danger\" type=\"button\">Delete</button>\n          <button class=\"btn btn-primary\" type=\"button\">Clear</button>\n        </div>\n      </div>\n    </form>\n  </div>\n  </div>\n"
+module.exports = "<div class=\"row\">\n  <div>\n    <form (ngSubmit)=\"onSubmit(f)\" #f=\"ngForm\">\n      <div class=\"row\">\n        <div class=\"col-sm-5 form-group\">\n          <label for=\"name\">Name</label>\n          <input type=\"text\" id=\"name\" class=\"form-control\" name=\"name\" ngModel required >\n        </div>\n        <div class=\"col-sm-3 form-group\">\n          <label for=\"amount\">Amount</label>\n          <input type=\"number\" id=\"amount\" class=\"form-control\" name=\"amount\" ngModel required pattern=\"^[1-9]+[0-9]*$\">\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-12\">\n          <button class=\"btn btn-success\" type=\"submit\" [disabled]=\"!f.valid\">{{editMode ? 'Update' : 'Add'}}</button>\n          <button class=\"btn btn-danger\" type=\"button\" (click)=\"onDelete()\" *ngIf=\"editMode\">Delete</button>\n          <button class=\"btn btn-primary\" type=\"button\" (click)=\"onClear()\">Clear</button>\n        </div>\n      </div>\n    </form>\n  </div>\n  </div>\n"
 
 /***/ }),
 
@@ -1208,6 +1299,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../shared/ingredient.model */ "./src/app/shared/ingredient.model.ts");
 /* harmony import */ var _shopping_list_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shopping-list.service */ "./src/app/shopping-list/shopping-list.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1220,26 +1312,52 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ShoppingEditComponent = /** @class */ (function () {
     function ShoppingEditComponent(slService) {
         this.slService = slService;
+        this.editMode = false;
     }
     ShoppingEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.slService.startedEditing
+            .subscribe(function (index) {
+            _this.editedItemIndex = index;
+            _this.editMode = true;
+            _this.editedItem = _this.slService.getIngredient(index);
+            _this.slForm.setValue({
+                name: _this.editedItem.name,
+                amount: _this.editedItem.amount
+            });
+        });
     };
-    ShoppingEditComponent.prototype.onAddItem = function () {
-        var ingName = this.nameInputRef.nativeElement.value;
-        var ingAmount = this.amountInputRef.nativeElement.value;
-        var newIngredient = new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_1__["Ingredient"](ingName, ingAmount);
-        this.slService.addIngredient(newIngredient);
+    ShoppingEditComponent.prototype.onSubmit = function (form) {
+        var value = form.value;
+        var newIngredient = new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_1__["Ingredient"](value.name, value.amount);
+        if (this.editMode) {
+            this.slService.updateIngredient(this.editedItemIndex, newIngredient);
+        }
+        else {
+            this.slService.addIngredient(newIngredient);
+        }
+        this.editMode = false;
+        form.reset();
+    };
+    ShoppingEditComponent.prototype.onClear = function () {
+        this.slForm.reset();
+        this.editMode = false;
+    };
+    ShoppingEditComponent.prototype.onDelete = function () {
+        this.slService.deleteIngredient(this.editedItemIndex);
+        this.onClear();
+    };
+    ShoppingEditComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
     };
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('nameInput'),
-        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
-    ], ShoppingEditComponent.prototype, "nameInputRef", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('amountInput'),
-        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
-    ], ShoppingEditComponent.prototype, "amountInputRef", void 0);
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('f'),
+        __metadata("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgForm"])
+    ], ShoppingEditComponent.prototype, "slForm", void 0);
     ShoppingEditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-shopping-edit',
@@ -1273,7 +1391,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <div class=\"col-xs-10\">\n        <app-shopping-edit></app-shopping-edit>\n        <hr>\n\n        <ul class=\"list-group\">\n            <a class=\"list-group-item\" style=\"cursor: pointer\" *ngFor=\"let ingredient of ingredients\">\n            {{ingredient.name}} ({{ingredient.amount}})\n            </a>\n        </ul>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"row\">\n    <div >\n        <app-shopping-edit></app-shopping-edit>\n        <hr>\n        <ul class=\"list-group\">\n            <a class=\"list-group-item\" style=\"cursor: pointer\" *ngFor=\"let ingredient of ingredients; let i = index\" (click)=\"onEditItem(i)\">\n            {{ingredient.name}} ({{ingredient.amount}})\n            </a>\n        </ul>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -1314,6 +1432,9 @@ var ShoppingListComponent = /** @class */ (function () {
     };
     ShoppingListComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
+    };
+    ShoppingListComponent.prototype.onEditItem = function (index) {
+        this.slService.startedEditing.next(index);
     };
     ShoppingListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1358,6 +1479,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var ShoppingListService = /** @class */ (function () {
     function ShoppingListService() {
         this.ingredientsChanged = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.startedEditing = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.ingredients = [
             new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_1__["Ingredient"]('apples', 5),
             new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_1__["Ingredient"]('tomatoes', 10),
@@ -1366,6 +1488,9 @@ var ShoppingListService = /** @class */ (function () {
     ShoppingListService.prototype.getIngredients = function () {
         return this.ingredients.slice();
     };
+    ShoppingListService.prototype.getIngredient = function (index) {
+        return this.ingredients[index];
+    };
     ShoppingListService.prototype.addIngredient = function (ingredient) {
         this.ingredients.push(ingredient);
         this.ingredientsChanged.next(this.ingredients.slice());
@@ -1373,6 +1498,14 @@ var ShoppingListService = /** @class */ (function () {
     ShoppingListService.prototype.addIngredients = function (ingredients) {
         var _a;
         (_a = this.ingredients).push.apply(_a, ingredients);
+        this.ingredientsChanged.next(this.ingredients.slice());
+    };
+    ShoppingListService.prototype.updateIngredient = function (index, newIngredient) {
+        this.ingredients[index] = newIngredient;
+        this.ingredientsChanged.next(this.ingredients.slice());
+    };
+    ShoppingListService.prototype.deleteIngredient = function (index) {
+        this.ingredients.splice(index, 1);
         this.ingredientsChanged.next(this.ingredients.slice());
     };
     ShoppingListService = __decorate([
