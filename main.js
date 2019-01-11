@@ -199,12 +199,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_data_storage_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./shared/data-storage.service */ "./src/app/shared/data-storage.service.ts");
 /* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./auth/auth.service */ "./src/app/auth/auth.service.ts");
 /* harmony import */ var _auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./auth/auth-guard.service */ "./src/app/auth/auth-guard.service.ts");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -258,7 +262,10 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
-                _angular_http__WEBPACK_IMPORTED_MODULE_21__["HttpModule"]
+                _angular_http__WEBPACK_IMPORTED_MODULE_21__["HttpModule"],
+                ngx_toastr__WEBPACK_IMPORTED_MODULE_25__["ToastrModule"].forRoot(),
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_26__["BrowserAnimationsModule"]
             ],
             providers: [_shopping_list_shopping_list_service__WEBPACK_IMPORTED_MODULE_15__["ShoppingListService"], _items_items_service__WEBPACK_IMPORTED_MODULE_20__["ItemsService"], _shared_data_storage_service__WEBPACK_IMPORTED_MODULE_22__["DataStorageService"], _auth_auth_service__WEBPACK_IMPORTED_MODULE_23__["AuthService"], _auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_24__["AuthGuard"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -343,8 +350,12 @@ var AuthService = /** @class */ (function () {
         this.router = router;
     }
     AuthService.prototype.signupUser = function (email, password) {
+        var _this = this;
         firebase__WEBPACK_IMPORTED_MODULE_0__["auth"]().createUserWithEmailAndPassword(email, password)
-            .catch(function (error) { return console.log(error); });
+            .catch(function (error) { return console.log(error); })
+            .then(function (response) {
+            _this.router.navigate(['/signin']);
+        });
     };
     AuthService.prototype.signinUser = function (email, password) {
         var _this = this;
@@ -398,7 +409,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2\">\n    <form (ngSubmit)=\"onSignin(f)\" #f=\"ngForm\">\n      <div class=\"form-group\">\n        <label for=\"email\">Mail</label>\n        <input type=\"email\" id=\"email\" name=\"email\" ngModel class=\"form-control\">\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Password</label>\n        <input type=\"password\" id=\"password\" name=\"password\" ngModel class=\"form-control\">\n      </div>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!f.valid\">Login</button>\n    </form>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2\">\n    <form (ngSubmit)=\"onSignin(signinForm.value)\" [formGroup]=\"signinForm\">\n      <div class=\"form-group\">\n        <label for=\"email\">Mail</label>\n        <input type=\"email\" id=\"email\" name=\"email\" formControlName=\"email\" class=\"form-control\">\n        <div *ngIf=\"!signinForm.controls['email'].valid && signinForm.controls['email'].touched\" >{{ titleAlert }}</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Password</label>\n        <input type=\"password\" id=\"password\" name=\"password\" formControlName=\"password\" class=\"form-control\">\n        <div *ngIf=\"!signinForm.controls['password'].valid && signinForm.controls['password'].touched\" >{{ titleAlert }}</div>\n      </div>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!signinForm.valid\">Login</button>\n    </form>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -413,7 +424,8 @@ module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-10 col-md
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SigninComponent", function() { return SigninComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth/auth.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -425,16 +437,23 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var SigninComponent = /** @class */ (function () {
-    function SigninComponent(authService) {
+    function SigninComponent(authService, formBuilder) {
         this.authService = authService;
+        this.formBuilder = formBuilder;
+        this.titleAlert = 'This field is required';
+        this.signinForm = formBuilder.group({
+            'email': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email])],
+            'password': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])]
+        });
     }
     SigninComponent.prototype.ngOnInit = function () {
     };
-    SigninComponent.prototype.onSignin = function (form) {
-        var email = form.value.email;
-        var password = form.value.password;
-        this.authService.signinUser(email, password);
+    SigninComponent.prototype.onSignin = function (post) {
+        this.Email = post.email;
+        this.Password = post.password;
+        this.authService.signinUser(this.Email, this.Password);
     };
     SigninComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -442,7 +461,7 @@ var SigninComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./signin.component.html */ "./src/app/auth/signin/signin.component.html"),
             styles: [__webpack_require__(/*! ./signin.component.css */ "./src/app/auth/signin/signin.component.css")]
         }),
-        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])
     ], SigninComponent);
     return SigninComponent;
 }());
@@ -469,7 +488,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2\">\n    <form (ngSubmit)=\"onSignup(f)\" #f=\"ngForm\">\n      <div class=\"form-group\">\n        <label for=\"email\">Mail</label>\n        <input type=\"email\" id=\"email\" name=\"email\" ngModel class=\"form-control\">\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Password</label>\n        <input type=\"password\" id=\"password\" name=\"password\" ngModel class=\"form-control\">\n      </div>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!f.valid\">Sign Up</button>\n    </form>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2\">\n    <form (ngSubmit)=\"onSignup(signupForm.value)\" [formGroup]=\"signupForm\">\n      <div class=\"form-group\">\n        <label for=\"email\">Mail</label>\n        <input id=\"email\" type=\"email\" name=\"email\" formControlName=\"email\" class=\"form-control\">\n        <div *ngIf=\"!signupForm.controls['email'].valid && signupForm.controls['email'].touched\" >{{ titleAlert }}</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Password</label>\n        <input type=\"password\" id=\"password\" name=\"password\" formControlName=\"password\" class=\"form-control\">\n        <div *ngIf=\"!signupForm.controls['password'].valid && signupForm.controls['email'].touched \">{{ titleAlert }}</div>\n      </div>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!signupForm.valid\" >Sign Up</button>\n    </form>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -484,7 +503,9 @@ module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-10 col-md
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupComponent", function() { return SignupComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth/auth.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth/auth.service.ts");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -496,16 +517,36 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var SignupComponent = /** @class */ (function () {
-    function SignupComponent(authService) {
+    function SignupComponent(authService, toastrService, formBuilder) {
         this.authService = authService;
+        this.toastrService = toastrService;
+        this.formBuilder = formBuilder;
+        this.titleAlert = 'This field is required';
+        this.signupForm = formBuilder.group({
+            'email': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email])],
+            'password': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].minLength(6)])]
+        });
     }
     SignupComponent.prototype.ngOnInit = function () {
     };
-    SignupComponent.prototype.onSignup = function (form) {
-        var email = form.value.email;
-        var password = form.value.password;
-        this.authService.signupUser(email, password);
+    SignupComponent.prototype.onSignup = function (post) {
+        this.Email = post.email;
+        this.Password = post.password;
+        this.authService.signupUser(this.Email, this.Password);
+        this.toastrService.success('Your account has been created');
+    };
+    SignupComponent.prototype.getEmailErrorMessage = function () {
+        return this.post.email.hasError('required') ? 'You must enter a value' :
+            this.post.email.hasError('email') ? 'Not a valid email' :
+                '';
+    };
+    SignupComponent.prototype.getPasswordErrorMessage = function () {
+        return this.post.password.hasError('required') ? 'You must enter a value' :
+            this.post.password.hasError('minlength') ? 'Must have at least 6 char' :
+                '';
     };
     SignupComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -513,7 +554,7 @@ var SignupComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./signup.component.html */ "./src/app/auth/signup/signup.component.html"),
             styles: [__webpack_require__(/*! ./signup.component.css */ "./src/app/auth/signup/signup.component.css")]
         }),
-        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])
     ], SignupComponent);
     return SignupComponent;
 }());
@@ -947,6 +988,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _items_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../items.service */ "./src/app/items/items.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_shared_data_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/shared/data-storage.service */ "./src/app/shared/data-storage.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -959,11 +1001,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ItemListComponent = /** @class */ (function () {
-    function ItemListComponent(itemsService, router, route) {
+    function ItemListComponent(itemsService, router, route, dataStorage) {
         this.itemsService = itemsService;
         this.router = router;
         this.route = route;
+        this.dataStorage = dataStorage;
     }
     ItemListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -987,7 +1031,8 @@ var ItemListComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_items_service__WEBPACK_IMPORTED_MODULE_1__["ItemsService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            src_app_shared_data_storage_service__WEBPACK_IMPORTED_MODULE_3__["DataStorageService"]])
     ], ItemListComponent);
     return ItemListComponent;
 }());
@@ -1253,10 +1298,10 @@ var ItemsService = /** @class */ (function () {
         this.slService = slService;
         this.itemsChanged = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
         this.items = [
-            new _items_module__WEBPACK_IMPORTED_MODULE_1__["ItemsModule"]('Starcraft2', 'RTS Game', 'https://www.geek.com/wp-content/uploads/2010/07/starcraft2-625x352.jpg', [new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('test', 1),
-                new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('test', 2)]),
-            new _items_module__WEBPACK_IMPORTED_MODULE_1__["ItemsModule"]('Zerg Queen', 'Zerg unit', 'https://swarmscblog.files.wordpress.com/2017/11/queen_eggs.jpg', [new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('test', 3),
-                new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('test', 4)])
+            new _items_module__WEBPACK_IMPORTED_MODULE_1__["ItemsModule"]('Burger', 'Food', 'https://www.thespruceeats.com/thmb/OE0BKB5LZeEhi_OEjinOCxVA0Bg=/1500x1000/filters:no_upscale():max_bytes(150000):strip_icc()/juicy-baked-burgers-3052097-7-5b1054308e1b6e0036bc6cd1.jpg', [new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('Meat', 1),
+                new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('Bread', 2)]),
+            new _items_module__WEBPACK_IMPORTED_MODULE_1__["ItemsModule"]('Pizza', 'Food', 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg', [new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('Bread', 3),
+                new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('Cheese', 4)])
         ];
     }
     ItemsService.prototype.setItems = function (items) {
