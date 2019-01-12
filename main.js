@@ -112,7 +112,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header>\n<p></p>\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n        <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>\n \n   \n          \n\n"
+module.exports = "<app-header></app-header>\n<p></p>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n        <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>\n \n   \n          \n\n"
 
 /***/ }),
 
@@ -488,7 +488,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2\">\n    <form (ngSubmit)=\"onSignup(signupForm.value)\" [formGroup]=\"signupForm\">\n      <div class=\"form-group\">\n        <label for=\"email\">Mail</label>\n        <input id=\"email\" type=\"email\" name=\"email\" formControlName=\"email\" class=\"form-control\">\n        <div *ngIf=\"!signupForm.controls['email'].valid && signupForm.controls['email'].touched\" >{{ titleAlert }}</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Password</label>\n        <input type=\"password\" id=\"password\" name=\"password\" formControlName=\"password\" class=\"form-control\">\n        <div *ngIf=\"!signupForm.controls['password'].valid && signupForm.controls['email'].touched \">{{ titleAlert }}</div>\n      </div>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!signupForm.valid\" >Sign Up</button>\n    </form>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2\">\n    <form (ngSubmit)=\"onSignup(signupForm.value)\" [formGroup]=\"signupForm\">\n      <div class=\"form-group\">\n        <label for=\"email\">Mail</label>\n        <input id=\"email\" type=\"email\" name=\"email\" formControlName=\"email\" class=\"form-control\">\n        <div *ngIf=\"!signupForm.controls['email'].valid && signupForm.controls['email'].touched\" >{{ titleAlert }}</div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"password\">Password</label>\n        <input type=\"password\" id=\"password\" name=\"password\" formControlName=\"password\" class=\"form-control\">\n        <div *ngIf=\"!signupForm.controls['password'].valid && signupForm.controls['password'].touched \">{{ titleAlert }}</div>\n      </div>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!signupForm.valid\" >Sign Up</button>\n    </form>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -834,7 +834,7 @@ module.exports = "input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched {\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <form [formGroup]=\"itemForm\" (ngSubmit)=\"onSubmit()\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!itemForm.valid\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-danger\"(click)=\"onCancel()\" >Cancel</button>\r\n                </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"name\">Name</label>\r\n                        <input type=\"text\" id=\"name\" formControlName=\"name\" class=\"form-control\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"imagePath\">Image URL</label>\r\n                        <input type=\"text\" id=\"imagePath\" formControlName=\"imagePath\" class=\"form-control\" #imagePath>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <img [src]=\"imagePath.value\" class=\"img-responsive\">\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"description\">Description</label>\r\n                        <textarea type=\"text\" id=\"description\" formControlName=\"description\" class=\"form-control\" rows=\"6\"></textarea>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\" formArrayName=\"ingredients\"> \r\n                    <div class=\"row\" *ngFor=\"let ingredientCtrl of getControls(); let i=index\" [formGroupName]=\"i\" style=\"margin-top: 10px\">\r\n                        <div class=\"col-md-6\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"name\">\r\n                        </div>\r\n                        <div class=\"col-md-4\">\r\n                            <input type=\"number\" class=\"form-control\" formControlName=\"amount\">\r\n                        </div>\r\n                        <div class=\"col-md-2\">\r\n                            <button type=\"button\" class=\"btn btn-danger\" (click)=\"onDeleteIngredient(i)\">X</button>\r\n                        </div>\r\n                    </div> \r\n                    <hr>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-12\">\r\n                            <button type=\"button\" class=\"btn btn-success\" (click)=\"onAddIngredient()\">Add Ingredient</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n        <form [formGroup]=\"itemForm\" (ngSubmit)=\"onSubmit()\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!itemForm.valid\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-danger\"(click)=\"onCancel()\" >Cancel</button>\r\n                    <hr>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"name\">Name</label>\r\n                        <input type=\"text\" id=\"name\" formControlName=\"name\" class=\"form-control\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"imagePath\">Image URL</label>\r\n                        <input type=\"text\" id=\"imagePath\" formControlName=\"imagePath\" class=\"form-control\" #imagePath>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <img [src]=\"imagePath.value\" class=\"img-responsive\" style=\"max-height: 300px\">\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"description\">Description</label>\r\n                        <textarea type=\"text\" id=\"description\" formControlName=\"description\" class=\"form-control\" rows=\"6\"></textarea>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-12\" formArrayName=\"ingredients\"> \r\n                    <div class=\"row\" *ngFor=\"let ingredientCtrl of getControls(); let i=index\" [formGroupName]=\"i\" style=\"margin-top: 10px\">\r\n                        <div class=\"col-md-6\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"name\">\r\n                        </div>\r\n                        <div class=\"col-md-4\">\r\n                            <input type=\"number\" class=\"form-control\" formControlName=\"amount\">\r\n                        </div>\r\n                        <div class=\"col-md-2\">\r\n                            <button type=\"button\" class=\"btn btn-danger\" (click)=\"onDeleteIngredient(i)\">X</button>\r\n                        </div>\r\n                    </div> \r\n                    <hr>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-12\">\r\n                            <button type=\"button\" class=\"btn btn-success\" (click)=\"onAddIngredient()\">Add Ingredient</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1011,6 +1011,7 @@ var ItemListComponent = /** @class */ (function () {
     }
     ItemListComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.dataStorage.getItems2();
         this.subscription = this.itemsService.itemsChanged
             .subscribe(function (items) {
             _this.items = items;
@@ -1275,10 +1276,8 @@ var ItemsModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemsService", function() { return ItemsService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _items_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./items.module */ "./src/app/items/items.module.ts");
-/* harmony import */ var _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/ingredient.model */ "./src/app/shared/ingredient.model.ts");
-/* harmony import */ var _shopping_list_shopping_list_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shopping-list/shopping-list.service */ "./src/app/shopping-list/shopping-list.service.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _shopping_list_shopping_list_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shopping-list/shopping-list.service */ "./src/app/shopping-list/shopping-list.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1291,18 +1290,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-
 var ItemsService = /** @class */ (function () {
     function ItemsService(slService) {
         this.slService = slService;
-        this.itemsChanged = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
-        this.items = [
-            new _items_module__WEBPACK_IMPORTED_MODULE_1__["ItemsModule"]('Burger', 'Food', 'https://www.thespruceeats.com/thmb/OE0BKB5LZeEhi_OEjinOCxVA0Bg=/1500x1000/filters:no_upscale():max_bytes(150000):strip_icc()/juicy-baked-burgers-3052097-7-5b1054308e1b6e0036bc6cd1.jpg', [new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('Meat', 1),
-                new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('Bread', 2)]),
-            new _items_module__WEBPACK_IMPORTED_MODULE_1__["ItemsModule"]('Pizza', 'Food', 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg', [new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('Bread', 3),
-                new _shared_ingredient_model__WEBPACK_IMPORTED_MODULE_2__["Ingredient"]('Cheese', 4)])
-        ];
+        this.itemsChanged = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.items = [];
     }
     ItemsService.prototype.setItems = function (items) {
         this.items = items;
@@ -1333,7 +1325,7 @@ var ItemsService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_shopping_list_shopping_list_service__WEBPACK_IMPORTED_MODULE_3__["ShoppingListService"]])
+        __metadata("design:paramtypes", [_shopping_list_shopping_list_service__WEBPACK_IMPORTED_MODULE_1__["ShoppingListService"]])
     ], ItemsService);
     return ItemsService;
 }());
@@ -1452,6 +1444,23 @@ var DataStorageService = /** @class */ (function () {
             var items = response.json();
             for (var _i = 0, items_1 = items; _i < items_1.length; _i++) {
                 var item = items_1[_i];
+                if (!item['ingredients']) {
+                    item['ingredients'] = [];
+                }
+            }
+            return items;
+        }))
+            .subscribe(function (items) {
+            _this.itemsService.setItems(items);
+        });
+    };
+    DataStorageService.prototype.getItems2 = function () {
+        var _this = this;
+        this.http.get('https://ng-myweb.firebaseio.com/items.json')
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
+            var items = response.json();
+            for (var _i = 0, items_2 = items; _i < items_2.length; _i++) {
+                var item = items_2[_i];
                 if (!item['ingredients']) {
                     item['ingredients'] = [];
                 }
