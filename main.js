@@ -581,7 +581,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n    <a class=\"navbar-brand\" routerLink=\"/\">Logo</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n      <ul class=\"navbar-nav mr-auto\">\n        <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n          <a class=\"nav-link\" routerLink=\"/\">Home \n            <span class=\"sr-only\">(current)</span></a>\n        </li>\n        <li class=\"nav-item\" routerLinkActive=\"active\">\n          <a class=\"nav-link\" routerLink=\"/item\" >Item</a>\n        </li>\n        <li class=\"nav-item\" routerLinkActive=\"active\">\n          <a class=\"nav-link\" routerLink=\"/shopping-list\">Shopping List</a>\n        </li>\n        <li class=\"nav-item dropdown\" *ngIf=\"authService.isAuthenticated()\">\n          <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            Manage  \n          </a>\n          <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\n            <a class=\"dropdown-item\" style=\"cursor: pointer\" (click)=\"onSaveData()\">Save Data</a>\n            <a class=\"dropdown-item\" style=\"cursor: pointer\" (click)=\"onFetchData()\">Fetch Data</a>\n          </div>\n        </li>\n      </ul>\n      <ul class=\"navbar-nav mr-right\">\n        <ng-template [ngIf]=\"!authService.isAuthenticated()\">\n          <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a class=\"nav-link\" routerLink=\"/signup\">Register</a>\n          </li>\n          <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a class=\"nav-link\" routerLink=\"/signin\">Login</a>\n          </li>\n        </ng-template>\n        <ng-template [ngIf]=\"authService.isAuthenticated()\">\n          <li style=\"cursor: pointer;\" (click)=\"onLogout()\">Logout</li>\n        </ng-template>\n      </ul>\n    </div>\n  </nav>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n    <a class=\"navbar-brand\" routerLink=\"/\">Logo</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n      <ul class=\"navbar-nav mr-auto\">\n        <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n          <a class=\"nav-link\" routerLink=\"/\">Home \n            <span class=\"sr-only\">(current)</span></a>\n        </li>\n        <li class=\"nav-item\" routerLinkActive=\"active\">\n          <a class=\"nav-link\" routerLink=\"/item\" >Item</a>\n        </li>\n        <li class=\"nav-item\" routerLinkActive=\"active\">\n          <a class=\"nav-link\" routerLink=\"/shopping-list\">Shopping List</a>\n        </li>\n        <li class=\"nav-item\" routerLinkActive=\"active\">\n          <a class=\"nav-link\" routerLink=\"/\">Card info</a>\n        </li>\n        <li class=\"nav-item dropdown\" *ngIf=\"authService.isAuthenticated()\">\n          <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            Manage  \n          </a>\n          <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\n            <a class=\"dropdown-item\" style=\"cursor: pointer\" (click)=\"onSaveData()\">Save Data</a>\n            <a class=\"dropdown-item\" style=\"cursor: pointer\" (click)=\"onFetchData()\">Fetch Data</a>\n          </div>\n        </li>\n      </ul>\n      <ul class=\"navbar-nav mr-right\">\n        <ng-template [ngIf]=\"!authService.isAuthenticated()\">\n          <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a class=\"nav-link\" routerLink=\"/signup\">Register</a>\n          </li>\n          <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a class=\"nav-link\" routerLink=\"/signin\">Login</a>\n          </li>\n        </ng-template>\n        <ng-template [ngIf]=\"authService.isAuthenticated()\">\n          <li style=\"cursor: pointer;\" (click)=\"onLogout()\">Logout</li>\n        </ng-template>\n      </ul>\n    </div>\n  </nav>\n"
 
 /***/ }),
 
@@ -632,6 +632,7 @@ var HeaderComponent = /** @class */ (function () {
     };
     HeaderComponent.prototype.onLogout = function () {
         this.authService.logout();
+        location.reload();
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
@@ -670,7 +671,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\r\n<button class=\"btn btn-primary\" (click)=\"onLoadServers()\">Load items</button>\r\n</div>\r\n"
+module.exports = "<div id=\"carouselExampleControls\" class=\"carousel slide\" data-ride=\"carousel\">\r\n    <div class=\"carousel-inner\">\r\n      <div class=\"carousel-item active\" >\r\n        <img class=\"d-block w-100\" src=\"https://www.cmo.com/content/dam/CMO/Home%20Page/1046x616_baconburger.jpg\" alt=\"First slide\">\r\n      </div>\r\n      <div class=\"carousel-item\">\r\n        <img class=\"d-block w-100\" src=\"https://pagedesignpro.com/wp-content/uploads/2018/03/maxresdefault-75.jpg\" alt=\"Second slide\">\r\n      </div>\r\n      <div class=\"carousel-item\">\r\n        <img class=\"d-block w-100\" src=\"https://www.kerbfood.com/wp-content/uploads/2016/10/KOLKATI_FATTIESBAKERY_GHERKIN_TARA_4032x3024-1600x900.jpg\" alt=\"Third slide\">\r\n      </div>\r\n    </div>\r\n    <a class=\"carousel-control-prev\" href=\"#carouselExampleControls\" role=\"button\" data-slide=\"prev\">\r\n      <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"carousel-control-next\" href=\"#carouselExampleControls\" role=\"button\" data-slide=\"next\">\r\n      <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Next</span>\r\n    </a>\r\n  </div>\r\n  <hr>\r\n  <div class=\"col-md-12\">\r\n    <button class=\"btn btn-primary\" (click)=\"onLoadServers()\">Load items</button>\r\n</div>"
 
 /***/ }),
 
@@ -700,14 +701,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var HomepageComponent = /** @class */ (function () {
     function HomepageComponent(router) {
         this.router = router;
+        this.items = [];
+        this.items = [
+            { name: "https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2016/howcuttingdo.jpg " },
+            { name: "https://pagedesignpro.com/wp-content/uploads/2018/03/maxresdefault-75.jpg " },
+            { name: "https://www.kerbfood.com/wp-content/uploads/2016/10/KOLKATI_FATTIESBAKERY_GHERKIN_TARA_4032x3024-1600x900.jpg" },
+            { name: "https://www.thelocal.de/userdata/images/article/dedf512d1afb037fe1c816dea70b4841d69494950a87518b7726d79fddedaec9.jpg " },
+        ];
     }
     HomepageComponent.prototype.ngOnInit = function () {
-        // const myNumbers = interval(1000);
-        // myNumbers.subscribe(
-        //   (number: number) => {
-        //     console.log(number);
-        //   }
-        // );
     };
     HomepageComponent.prototype.onLoadServers = function () {
         this.router.navigate(['/item']);
